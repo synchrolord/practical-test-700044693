@@ -43,7 +43,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
        jumpAction.action.Enable();
        jumpAction.action.performed += OnJump;
 
-       
     }
 
 
@@ -52,6 +51,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         moveAction.action.Disable();
         jumpAction.action.Disable();
         jumpAction.action.performed -= OnJump;
+
     }
 
 
@@ -107,5 +107,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             QueryTriggerInteraction.Ignore
         );
     }
+    
+
 
 }

@@ -6,6 +6,7 @@ public class Lava : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.layer !=
             LayerMask.NameToLayer("Player"))
             return;
@@ -15,6 +16,7 @@ public class Lava : MonoBehaviour
         if (rb == null) return;
 
         Debug.Log("Burned");
+        GameEvents.PlayerBurned();
 
         rb.position = startPad.position + (Vector3.up * 2f);
         rb.linearVelocity = Vector3.zero;

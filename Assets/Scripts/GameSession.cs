@@ -4,6 +4,10 @@ public class GameSession : MonoBehaviour
 {
     public int crystals = 0;
     public int totalCrystals = 3;
+    
+    
+    public int burns = 0;
+    public int maxBurns = 3;
 
     public enum GameState
     {
@@ -19,6 +23,8 @@ public class GameSession : MonoBehaviour
         GameEvents.CrystalCollected += AddCrystal;
         GameEvents.Won += OnWin;
         GameEvents.Lost += OnLose;
+        
+        GameEvents.Burned += OnBurned;
     }
 
     private void OnDisable()
@@ -26,6 +32,8 @@ public class GameSession : MonoBehaviour
         GameEvents.CrystalCollected -= AddCrystal;
         GameEvents.Won -= OnWin;
         GameEvents.Lost -= OnLose;
+        
+        GameEvents.Burned -= OnBurned;
     }
 
 
@@ -64,4 +72,19 @@ public class GameSession : MonoBehaviour
     }
     
     
+    private void OnBurned()
+    {
+        if (state != GameState.Playing)
+            return;
+
+        burns++;
+
+        Debug.Log("Burns " + burns + " / " + maxBurns);
+
+        if (burns >= maxBurns)
+        {
+            GameEvents.Lose();
+        }
+    }
+
 }
