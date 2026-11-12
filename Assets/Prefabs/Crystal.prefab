@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2794131653112949095}
   - component: {fileID: 6556256357383633303}
   - component: {fileID: 3825125603432884076}
-  m_Layer: 0
+  - component: {fileID: -3190833697803315794}
+  m_Layer: 7
   m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,3 +113,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3190833697803315794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2561313296012205477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3072e567d6a67c349ae90b2ba01cf8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalPickup
+  pickupSound: {fileID: 8300000, guid: 393e0d03e63a5f2409cb487173b35207, type: 3}
