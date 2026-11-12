@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 392520904}
   - component: {fileID: 392520903}
   - component: {fileID: 392520902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: platform 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 712056627}
   - component: {fileID: 712056626}
   - component: {fileID: 712056625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: platform 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,6 +819,7 @@ GameObject:
   - component: {fileID: 902616276}
   - component: {fileID: 902616275}
   - component: {fileID: 902616274}
+  - component: {fileID: 902616279}
   m_Layer: 0
   m_Name: PLayer
   m_TagString: Untagged
@@ -948,6 +949,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &902616279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902616273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6d6af35ebe98408e6ecb36199b0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  moveAction: {fileID: 5135490298718612280, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  jumpAction: {fileID: 2135190200368913838, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  moonSettinggs: {fileID: 2140363570}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &998396828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,7 +1205,7 @@ GameObject:
   - component: {fileID: 1717448594}
   - component: {fileID: 1717448593}
   - component: {fileID: 1717448592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StartPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1298,7 +1317,7 @@ GameObject:
   - component: {fileID: 1841963578}
   - component: {fileID: 1841963577}
   - component: {fileID: 1841963576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: platform 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1522,7 +1541,7 @@ GameObject:
   - component: {fileID: 2128117420}
   - component: {fileID: 2128117419}
   - component: {fileID: 2128117418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: platform 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1622,6 +1641,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128117416}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2140363569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140363571}
+  - component: {fileID: 2140363570}
+  m_Layer: 0
+  m_Name: MoonSettinggs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2140363570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140363569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9237c2eef26a1b40afea54f1a99671d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoonSettinggs
+  moveSpeed: 12
+  jumpStrength: 12
+  deceleration: 25
+  gravity: 1.625
+  GroundCheck: 0
+--- !u!4 &2140363571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140363569}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.93333, y: -0, z: 19.37083}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1737446309946220976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1694,3 +1762,4 @@ SceneRoots:
   - {fileID: 583373337}
   - {fileID: 535261093}
   - {fileID: 998396832}
+  - {fileID: 2140363571}
