@@ -5,6 +5,7 @@ public class Beacon : MonoBehaviour
     public Renderer beaconRenderer;
     public Material offMaterial;
     public Material onMaterial;
+    public AudioClip activateSound;
 
     private bool activated = false;
 
@@ -25,8 +26,19 @@ public class Beacon : MonoBehaviour
 
     private void Activate()
     {
+        if (activated)
+            return;
+
         activated = true;
         beaconRenderer.material = onMaterial;
+
+        if (activateSound != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                activateSound,
+                transform.position
+            );
+        }
 
         Debug.Log("Beacon ON!");
     }
@@ -39,6 +51,10 @@ public class Beacon : MonoBehaviour
         if (other.gameObject.layer ==
             LayerMask.NameToLayer("Player"))
         {
+            if (other.attachedRigidbody == null ||
+                other.attachedRigidbody.isKinematic)
+                return;
+
             GameEvents.Win();
         }
     }
