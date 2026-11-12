@@ -10,7 +10,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
 {
 
     [Header("input")]
-    
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference jumpAction;
     
@@ -20,16 +19,21 @@ public class NewMonoBehaviourScript : MonoBehaviour
     
     [Header("other")]
     [SerializeField] private LayerMask groundLayer;
+    public AudioClip jumpSound;
     
     
     private Rigidbody rb;
     private Vector2 moveinput;
     private bool jumpRequisted;
+    private AudioSource audioSource;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 0f;
+        audioSource.playOnAwake = false;
 
         Physics.gravity = new Vector3(
             0f, -moonSettinggs.gravity, 0f
@@ -42,6 +46,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
        moveAction.action.Enable();
        jumpAction.action.Enable();
        jumpAction.action.performed += OnJump;
+       GameEvents.Won += StopPlayer;
+       GameEvents.Lost += StopPlayer;
 
     }
 
@@ -51,25 +57,34 @@ public class NewMonoBehaviourScript : MonoBehaviour
         moveAction.action.Disable();
         jumpAction.action.Disable();
         jumpAction.action.performed -= OnJump;
+        GameEvents.Won -= StopPlayer;
+        GameEvents.Lost -= StopPlayer;
 
     }
 
 
     private void Update()
     {
+        if (rb.isKinematic)
+            return;
+
         moveinput = moveAction.action.ReadValue<Vector2>();
     }
 
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        jumpRequisted = true;
+        if (!rb.isKinematic && IsGrounded())
+            jumpRequisted = true;
     }
 
 
 
     private void FixedUpdate()
     {
+        if (rb.isKinematic)
+            return;
+
         Vector3 direction = new Vector3(
             moveinput.x, 0f, moveinput.y
         );
@@ -91,18 +106,34 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 Vector3.up * moonSettinggs.jumpStrength,
                 ForceMode.Impulse
             );
+
+            if (jumpSound != null)
+                audioSource.PlayOneShot(jumpSound);
         }
 
         jumpRequisted = false;
     }
 
     
+    private void StopPlayer()
+    {
+        moveAction.action.Disable();
+        jumpAction.action.Disable();
+        moveinput = Vector2.zero;
+        jumpRequisted = false;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = true;
+    }
+
+
     private bool IsGrounded()
     {
-        return Physics.Raycast(
+        return rb.linearVelocity.y <= 0.05f && Physics.Raycast(
             transform.position,
             Vector3.down,
-            1.1f,
+            moonSettinggs.GroundCheck,
             groundLayer,
             QueryTriggerInteraction.Ignore
         );
